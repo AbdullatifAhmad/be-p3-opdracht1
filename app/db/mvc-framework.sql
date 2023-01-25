@@ -29,26 +29,82 @@ USE `mvc-2109a`;
 -- Tabelstructuur voor tabel `country`
 --
 
-DROP TABLE IF EXISTS `country`;
-CREATE TABLE IF NOT EXISTS `country` (
+DROP TABLE IF EXISTS `voertuig`;
+CREATE TABLE IF NOT EXISTS `voertuig` (
   `Id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `Name` varchar(100) NOT NULL,
-  `CapitalCity` varchar(100) NOT NULL,
-  `Continent` enum('Afrika','Noord-Amerika','Zuid-Amerika','Oceani&euml;','Europa','Azië','Antarctica') NOT NULL,
-  `Population` int(10) UNSIGNED NOT NULL,
+  `Kenteken` varchar(8) NOT NULL,
+  `Type` varchar(100) NOT NULL,
+  `Bouwjaar` date NOT NULL,
+  `Brandstof` varchar(10) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
 
 --
--- Gegevens worden geëxporteerd voor tabel `country`
+-- Gegevens worden geëxporteerd voor tabel `voertuig`
 --
 
-INSERT INTO `country` (`Id`, `Name`, `CapitalCity`, `Continent`, `Population`) VALUES
-(1, 'Nederland', 'Amsterdam', 'Europa', 17000000),
-(2, 'Belgi&euml;', 'Brussel', 'Europa', 11500000),
-(4, 'Marokko', 'Rabat', 'Afrika', 36900000);
+INSERT INTO `Voertuig` (`Kenteken`, `Type`, `Bouwjaar`, `Brandstof`) VALUES
+('AU-67-IO', 'Golf', '2017-06-12', 'Diesel'),
+('TR-24-OP', 'DAF', '2019-05-23', 'Diesel'),
+('TH-78-KL', 'Mercedes', '2023-01-01', 'Benzine'),
+('90-KL-TR', 'Fiat 500', '2021-09-12', 'Benzine'),
+('34-TK-LP', 'Scania', '2015-03-13', 'Diesel'),
+('YY-OP-78', 'MBW M5', '2022-05-13', 'Diesel'),
+('UU-HH-JK', 'M.A.N', '2017-12-03', 'Diesel'),
+('ST-FZ-28', 'Citroën', '2018-01-20', 'Elektrisch'),
+('123-FR-T', 'Piaggio ZIP', '2021-02-01', 'Benzine'),
+('DRS-52-P', 'Vespa', '2022-03-21', 'Benzine'),
+('STP-12-U', 'Kymco', '2022-07-02', 'Benzine'),
+('45-SD-23', 'Renault', '2023-01-01', 'Diesel'),
 COMMIT;
 
+--
+-- Tabelstructuur voor tabel `VoertuigInstructeur`
+--
+
+DROP TABLE IF EXISTS `VoertuigInstructeur`;
+CREATE TABLE IF NOT EXISTS `VoertuigInstructeur` (
+  `Id` smallint(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `VoertuigId` int(10) NOT NULL,
+  `InstructeurId` int(10) NOT NULL,
+  `DatumToekenning` date NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `VoertuigInstructeur`
+--
+
+INSERT INTO `VoertuigInstructeur` (`VoertuigId`, `InstructeurId`, `DatumToekenning`) VALUES
+('1', '5', '2017-06-18'),
+('3', '1', '2021-09-26'),
+('9', '1', '2021-09-27'),
+('3', '4', '2022-08-01'),
+('5', '1', '2019-08-30'),
+('10', '5', '2020-02-02'),
+
+COMMIT;
+
+-- Tabelstructuur voor tabel `TypeVoertuig`
+--
+
+DROP TABLE IF EXISTS `TypeVoertuig`;
+CREATE TABLE IF NOT EXISTS `TypeVoertuig` (
+  `Id` tinyint(3) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `TypeVoertuig` varchar(50) NOT NULL,
+  `RijbewijsCategorie` varchar(10) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `TypeVoertuig`
+--
+
+INSERT INTO `TypeVoertuig` (`TypeVoertuig`, `RijbewijsCategorie`) VALUES
+('personenauto', 'B'),
+('Vrachtwagen', 'C'),
+('Bus', 'D'),
+('Bromfiets', 'AM');
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
